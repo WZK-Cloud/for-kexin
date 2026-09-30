@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🌊 熊可馨 · 生日快乐 · 蓝色大海的祝福</title>
+  <style>
+    /* 全局海洋风格 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(145deg, #0b2b44 0%, #1b4f6e 50%, #2a6f8f 100%);
+      font-family: 'Segoe UI', 'Helvetica Neue', system-ui, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      color: #e0f0ff;
+      line-height: 1.6;
+    }
+
+    /* 主贺卡——波浪玻璃质感 */
+    .birthday-card {
+      max-width: 1000px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 3rem 3rem 2rem 2rem;
+      box-shadow: 0 30px 50px rgba(0, 0, 0, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(180, 220, 255, 0.3);
+      overflow: hidden;
+      padding: 2.5rem 2rem 2rem;
+      transition: all 0.3s ease;
+    }
+
+    /* 标题区域 */
+    .header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .header h1 {
+      font-size: 3.2rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-shadow: 0 5px 15px #0a3b55, 0 0 10px #8ac6f0;
+      color: #f0f9ff;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .header h1 span {
+      font-size: 2.5rem;
+      display: inline-block;
+      animation: float 5s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .subhead {
+      font-size: 1.2rem;
+      color: #b8dcf5;
+      letter-spacing: 2px;
+      border-bottom: 1px dashed #6fa8c7;
+      padding-bottom: 1rem;
+      display: inline-block;
+    }
+
+    /* 大海图片区域 —— 完全贴合卡片，带波浪装饰 */
+    .ocean-container {
+      position: relative;
+      margin: 1.5rem 0 2rem;
+      border-radius: 2rem;
+      overflow: hidden;
+      box-shadow: 0 15px 30px rgba(0, 10, 20, 0.7), inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+    }
+
+    .ocean-image {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.7s ease;
+      filter: brightness(1.05) saturate(1.1);
+    }
+
+    .ocean-container:hover .ocean-image {
+      transform: scale(1.02);
+    }
+
+    /* 图片上的波浪文字 */
+    .wave-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, #0a2e42e0, #1d506bc0, transparent);
+      color: white;
+      padding: 2rem 1.5rem 1rem;
+      font-size: 1.3rem;
+      text-align: right;
+      font-style: italic;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 6px #00000080;
+      pointer-events: none;
+    }
+
+    /* 祝福语卡片 */
+    .message-section {
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+      margin-bottom: 2rem;
+    }
+
+    .greeting {
+      background: rgba(8, 38, 56, 0.6);
+      border-left: 6px solid #67c8ff;
+      border-radius: 0 30px 30px 0;
+      padding: 1.6rem 2rem;
+      box-shadow: 0 10px 20px -5px #041d2b;
+    }
+
+    .greeting p {
+      font-size: 1.3rem;
+      margin-bottom: 0.75rem;
+      color: #daf0ff;
+    }
+
+    .greeting .name {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #aae0ff;
+      text-shadow: 0 0 12px #2f9fd0;
+      display: inline-block;
+      margin-bottom: 0.5rem;
+    }
+
+    .greeting .signature {
+      text-align: right;
+      font-size: 1.1rem;
+      color: #9ac2db;
+      margin-top: 1rem;
+      font-style: italic;
+    }
+
+    /* 蓝色元素 / 大海主题装饰 */
+    .blue-accents {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem 3rem;
+      margin: 1.5rem 0 1.8rem;
+      font-size: 1.9rem;
+      opacity: 0.9;
+    }
+
+    .blue-accents span {
+      filter: drop-shadow(0 0 8px #4aa9e0);
+      transition: transform 0.2s;
+      animation: gentleWave 4s infinite alternate;
+    }
+
+    .blue-accents span:nth-child(2) { animation-delay: 0.6s; }
+    .blue-accents span:nth-child(3) { animation-delay: 1.2s; }
+    .blue-accents span:nth-child(4) { animation-delay: 1.8s; }
+    .blue-accents span:nth-child(5) { animation-delay: 2.4s; }
+
+    @keyframes gentleWave {
+      from { transform: translateY(0) rotate(0deg); }
+      to { transform: translateY(-8px) rotate(3deg); }
+    }
+
+    /* 互动小工具：祝福生成器 */
+    .wish-tool {
+      background: #d9edfa15;
+      border: 1px solid #5f9fc070;
+      border-radius: 2rem;
+      padding: 1.8rem 1.8rem 2rem;
+      margin-top: 0.8rem;
+      backdrop-filter: blur(5px);
+    }
+
+    .wish-tool h3 {
+      font-weight: 400;
+      font-size: 1.5rem;
+      color: #c6e5ff;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      letter-spacing: 1px;
+    }
+
+    .wish-tool h3 i {
+      font-style: normal;
+      font-size: 2rem;
+    }
+
+    .input-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .input-group label {
+      font-size: 1.1rem;
+      color: #b4d9f0;
+    }
+
+    .input-group input {
+      flex: 1 1 240px;
+      background: #0e2c40;
+      border: 1px solid #4183a8;
+      border-radius: 60px;
+      padding: 0.9rem 1.4rem;
+      font-size: 1.1rem;
+      color: #e8f4ff;
+      outline: none;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .input-group input:focus {
+      border-color: #9ad6ff;
+      box-shadow: 0 0 0 4px #2e7fa050;
+      background: #0a2433;
+    }
+
+    .input-group input::placeholder {
+      color: #5885a0;
+      font-style: italic;
+    }
+
+    .btn {
+      background: #2c7fb0;
+      border: none;
+      color: white;
+      font-size: 1.1rem;
+      padding: 0.9rem 2rem;
+      border-radius: 60px;
+      cursor: pointer;
+      font-weight: 500;
+      letter-spacing: 1px;
+      transition: all 0.2s;
+      box-shadow: 0 8px 18px -6px #02131e;
+      border: 1px solid #7ac4f0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .btn:hover {
+      background: #3a97cc;
+      transform: scale(1.02);
+      box-shadow: 0 12px 22px -6px #0b3047;
+      border-color: #b0e0ff;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .wish-output {
+      background: #0f3145c0;
+      border-radius: 60px;
+      padding: 1rem 1.8rem;
+      min-height: 4.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: #c7e6ff;
+      border: 1px dashed #6eaccf;
+      word-break: break-word;
+      transition: all 0.3s;
+      font-style: italic;
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    .wish-output.glow {
+      background: #134a66;
+      color: #ffffff;
+      border-style: solid;
+      border-color: #9fd3ff;
+      box-shadow: 0 0 22px #287cac;
+    }
+
+    /* 页脚 */
+    .footer-note {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #82adc7;
+      letter-spacing: 1px;
+    }
+
+    /* 响应式 */
+    @media (max-width: 600px) {
+      .birthday-card {
+        padding: 1.5rem 1rem;
+        border-radius: 2rem;
+      }
+      .header h1 {
+        font-size: 2.2rem;
+      }
+      .header h1 span {
+        font-size: 1.8rem;
+      }
+      .greeting .name {
+        font-size: 1.6rem;
+      }
+      .blue-accents {
+        gap: 1rem;
+        font-size: 1.5rem;
+      }
+      .wave-caption {
+        font-size: 1rem;
+        padding: 1rem 1rem 0.7rem;
+      }
+      .input-group input {
+        flex: 1 1 100%;
+      }
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="birthday-card">
+    <!-- 头部 -->
+    <div class="header">
+      <h1>
+        <span>🌊</span> 熊可馨，生日快乐 <span>🐚</span>
+      </h1>
+      <div class="subhead">· 如海般自由 · 如蓝般澄澈 ·</div>
+    </div>
+
+    <!-- 大海图片区域 (使用免费海洋图片，可替换为你准备的图片) -->
+    <div class="ocean-container">
+      <!-- 
+        说明：你可以将下面的 src 替换成你为可馨准备的那张大海图片的 URL 
+        这里使用一张深海波浪图片作为示例 (来自 Unsplash 免费图库，直接链接)
+        你也可以用本地图片，如 src="my-ocean.jpg"
+      -->
+      <img 
+        class="ocean-image" 
+        src="https://images.unsplash.com/photo-1505118380757-91f5f5632de0?q=80&w=1200&auto=format&fit=crop" 
+        alt="深蓝色的大海与波浪"
+      >
+      <div class="wave-caption">
+        ~ 愿可馨的世界，永远有海风与星光 ~
+      </div>
+    </div>
+
+    <!-- 蓝色大海主题装饰小元素 -->
+    <div class="blue-accents">
+      <span>🐟</span>
+      <span>💙</span>
+      <span>🐚</span>
+      <span>🌊</span>
+      <span>🧜‍♀️</span>
+    </div>
+
+    <!-- 祝福语 -->
+    <div class="message-section">
+      <div class="greeting">
+        <p>亲爱的 <span class="name">熊可馨</span> ，</p>
+        <p>今天是属于你的日子。愿大海的宁静与深邃，都化作你新一岁的底色。愿你永远拥有海风般的自由，浪花般的活力，以及深海般沉静的快乐。</p>
+        <p>把这片蓝色送给你 —— 就像你喜欢的，广阔、温柔、深邃。</p>
+        <div class="signature">—— 永远支持你的朋友 🌊</div>
+      </div>
+    </div>
+
+    <!-- 互动小工具：生成一句海洋风生日祝福 -->
+    <div class="wish-tool">
+      <h3><i>💌</i> 为可馨写一句海洋祝福</h3>
+      <div class="input-group">
+        <label for="nameInput">她的名字</label>
+        <input type="text" id="nameInput" placeholder="例如：可馨、小熊..." value="熊可馨">
+        <button class="btn" id="generateWish">✨ 生成祝福</button>
+      </div>
+      <div class="wish-output" id="wishOutput">
+        点击按钮，生成一句独一无二的蓝色祝福～
+      </div>
+    </div>
+
+    <!-- 页脚 -->
+    <div class="footer-note">
+      🌊 愿每一朵浪花都为可馨歌唱，生日快乐！ 🐚
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const nameInput = document.getElementById('nameInput');
+      const generateBtn = document.getElementById('generateWish');
+      const wishOutput = document.getElementById('wishOutput');
+
+      // 海洋主题祝福模板 (灵活使用名字)
+      const oceanWishes = [
+        (name) => `🌊 愿 ${name} 的每一天，都如海面初升的太阳，温柔又充满希望。`,
+        (name) => `💙 ${name}，愿你的快乐像潮汐一样，永不退去；烦恼像泡沫，一触即散。`,
+        (name) => `🐚 把大海的静谧送给 ${name}，愿新的一岁，心纳百川，自在如风。`,
+        (name) => `✨ ${name}，愿你遇见所有蓝色奇迹，像深海里的珍珠，独一无二。`,
+        (name) => `🌅 致 ${name}：愿海风带走忧愁，海浪送来好运，生日快乐！`,
+        (name) => `🧜‍♀️ 如果大海有声音，那一定是它在说：${name}，生日快乐！`,
+        (name) => `🐟 愿 ${name} 的生活如珊瑚礁般多彩，如深海般沉静有力。`,
+        (name) => `⚓ ${name}，愿你永远拥有启航的勇气，和港湾般的温暖。`,
+        (name) => `🌊 为 ${name} 种下一片蓝色，愿它在你心里生长成无边的自由。`,
+        (name) => `💙 星辰大海，皆在 ${name} 眼中。生日快乐，永远闪耀。`,
+        (name) => `🐚 可馨，愿你的笑容像海面上的粼粼波光，永远清澈明亮。`,
+        (name) => `🌊 熊可馨，大海把最温柔的蓝色都借给了你，生日快乐！`
+      ];
+
+      // 随机海洋 emoji 小前缀（可选，已包含在模板中，但保留额外装饰感）
+      function getRandomWish(name) {
+        // 如果名字为空，用默认词
+        const safeName = name.trim() === '' ? '可馨' : name.trim();
+        // 随机选取一条
+        const randomIndex = Math.floor(Math.random() * oceanWishes.length);
+        return oceanWishes[randomIndex](safeName);
+      }
+
+      // 更新输出并且带上动画
+      function updateWish() {
+        const name = nameInput.value;
+        const wish = getRandomWish(name);
+        wishOutput.textContent = wish;
+        // 添加高亮动画
+        wishOutput.classList.add('glow');
+        setTimeout(() => {
+          wishOutput.classList.remove('glow');
+        }, 600);
+      }
+
+      // 点击按钮生成
+      generateBtn.addEventListener('click', updateWish);
+
+      // 如果用户按回车也可以生成
+      nameInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          updateWish();
+        }
+      });
+
+      // 页面加载后自动生成一条祝福，使用默认名字“熊可馨”
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+          updateWish();
+        }, 300);
+      });
+    })();
+  </script>
+</body>
+</html>
