@@ -5,12 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🌊 熊可馨 · 生日快乐 · 蓝色大海的祝福</title>
   <style>
-    /* 全局海洋风格 */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       background: linear-gradient(145deg, #0b2b44 0%, #1b4f6e 50%, #2a6f8f 100%);
@@ -25,7 +20,6 @@
       line-height: 1.6;
     }
 
-    /* 主贺卡——波浪玻璃质感 */
     .birthday-card {
       max-width: 1000px;
       width: 100%;
@@ -40,11 +34,7 @@
       transition: all 0.3s ease;
     }
 
-    /* 标题区域 */
-    .header {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
+    .header { text-align: center; margin-bottom: 2rem; }
 
     .header h1 {
       font-size: 3.2rem;
@@ -80,7 +70,6 @@
       display: inline-block;
     }
 
-    /* 大海图片区域 —— 完全贴合卡片，带波浪装饰 */
     .ocean-container {
       position: relative;
       margin: 1.5rem 0 2rem;
@@ -97,11 +86,8 @@
       filter: brightness(1.05) saturate(1.1);
     }
 
-    .ocean-container:hover .ocean-image {
-      transform: scale(1.02);
-    }
+    .ocean-container:hover .ocean-image { transform: scale(1.02); }
 
-    /* 图片上的波浪文字 */
     .wave-caption {
       position: absolute;
       bottom: 0;
@@ -118,7 +104,6 @@
       pointer-events: none;
     }
 
-    /* 祝福语卡片 */
     .message-section {
       display: flex;
       flex-direction: column;
@@ -157,7 +142,6 @@
       font-style: italic;
     }
 
-    /* 蓝色元素 / 大海主题装饰 */
     .blue-accents {
       display: flex;
       flex-wrap: wrap;
@@ -184,7 +168,6 @@
       to { transform: translateY(-8px) rotate(3deg); }
     }
 
-    /* 互动小工具：祝福生成器 */
     .wish-tool {
       background: #d9edfa15;
       border: 1px solid #5f9fc070;
@@ -205,10 +188,7 @@
       letter-spacing: 1px;
     }
 
-    .wish-tool h3 i {
-      font-style: normal;
-      font-size: 2rem;
-    }
+    .wish-tool h3 i { font-style: normal; font-size: 2rem; }
 
     .input-group {
       display: flex;
@@ -219,10 +199,7 @@
       margin-bottom: 1.5rem;
     }
 
-    .input-group label {
-      font-size: 1.1rem;
-      color: #b4d9f0;
-    }
+    .input-group label { font-size: 1.1rem; color: #b4d9f0; }
 
     .input-group input {
       flex: 1 1 240px;
@@ -243,10 +220,7 @@
       background: #0a2433;
     }
 
-    .input-group input::placeholder {
-      color: #5885a0;
-      font-style: italic;
-    }
+    .input-group input::placeholder { color: #5885a0; font-style: italic; }
 
     .btn {
       background: #2c7fb0;
@@ -274,9 +248,7 @@
       border-color: #b0e0ff;
     }
 
-    .btn:active {
-      transform: scale(0.98);
-    }
+    .btn:active { transform: scale(0.98); }
 
     .wish-output {
       background: #0f3145c0;
@@ -304,7 +276,6 @@
       box-shadow: 0 0 22px #287cac;
     }
 
-    /* 页脚 */
     .footer-note {
       text-align: center;
       margin-top: 2rem;
@@ -313,41 +284,85 @@
       letter-spacing: 1px;
     }
 
-    /* 响应式 */
+    /* ====== 音乐播放器样式 ====== */
+    .music-player {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(13, 45, 66, 0.75);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(130, 200, 255, 0.5);
+      border-radius: 60px;
+      padding: 10px 20px 10px 12px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+      transition: all 0.3s;
+    }
+
+    .music-player:hover {
+      border-color: #9fd3ff;
+      box-shadow: 0 14px 36px rgba(40, 140, 200, 0.4);
+    }
+
+    .music-btn {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: #2c7fb0;
+      border: 1px solid #7ac4f0;
+      color: white;
+      font-size: 1.3rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .music-btn:hover {
+      background: #3a97cc;
+      transform: scale(1.08);
+    }
+
+    .music-btn.playing {
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(122, 196, 240, 0.7); }
+      50% { box-shadow: 0 0 0 12px rgba(122, 196, 240, 0); }
+    }
+
+    .music-label {
+      font-size: 0.9rem;
+      color: #c7e6ff;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
     @media (max-width: 600px) {
-      .birthday-card {
-        padding: 1.5rem 1rem;
-        border-radius: 2rem;
-      }
-      .header h1 {
-        font-size: 2.2rem;
-      }
-      .header h1 span {
-        font-size: 1.8rem;
-      }
-      .greeting .name {
-        font-size: 1.6rem;
-      }
-      .blue-accents {
-        gap: 1rem;
-        font-size: 1.5rem;
-      }
-      .wave-caption {
-        font-size: 1rem;
-        padding: 1rem 1rem 0.7rem;
-      }
-      .input-group input {
-        flex: 1 1 100%;
-      }
-      .btn {
-        width: 100%;
-      }
+      .birthday-card { padding: 1.5rem 1rem; border-radius: 2rem; }
+      .header h1 { font-size: 2.2rem; }
+      .header h1 span { font-size: 1.8rem; }
+      .greeting .name { font-size: 1.6rem; }
+      .blue-accents { gap: 1rem; font-size: 1.5rem; }
+      .wave-caption { font-size: 1rem; padding: 1rem 1rem 0.7rem; }
+      .input-group input { flex: 1 1 100%; }
+      .btn { width: 100%; }
+      .music-player { bottom: 14px; right: 14px; padding: 8px 14px 8px 10px; }
+      .music-btn { width: 40px; height: 40px; font-size: 1.1rem; }
+      .music-label { font-size: 0.8rem; }
     }
   </style>
 </head>
 <body>
   <div class="birthday-card">
-    <!-- 头部 -->
     <div class="header">
       <h1>
         <span>🌊</span> 熊可馨，生日快乐 <span>🐚</span>
@@ -355,13 +370,7 @@
       <div class="subhead">· 如海般自由 · 如蓝般澄澈 ·</div>
     </div>
 
-    <!-- 大海图片区域 (使用免费海洋图片，可替换为你准备的图片) -->
     <div class="ocean-container">
-      <!-- 
-        说明：你可以将下面的 src 替换成你为可馨准备的那张大海图片的 URL 
-        这里使用一张深海波浪图片作为示例 (来自 Unsplash 免费图库，直接链接)
-        你也可以用本地图片，如 src="my-ocean.jpg"
-      -->
       <img 
         class="ocean-image" 
         src="https://images.unsplash.com/photo-1505118380757-91f5f5632de0?q=80&w=1200&auto=format&fit=crop" 
@@ -372,7 +381,6 @@
       </div>
     </div>
 
-    <!-- 蓝色大海主题装饰小元素 -->
     <div class="blue-accents">
       <span>🐟</span>
       <span>💙</span>
@@ -381,7 +389,6 @@
       <span>🧜‍♀️</span>
     </div>
 
-    <!-- 祝福语 -->
     <div class="message-section">
       <div class="greeting">
         <p>亲爱的 <span class="name">熊可馨</span> ，</p>
@@ -391,7 +398,6 @@
       </div>
     </div>
 
-    <!-- 互动小工具：生成一句海洋风生日祝福 -->
     <div class="wish-tool">
       <h3><i>💌</i> 为可馨写一句海洋祝福</h3>
       <div class="input-group">
@@ -404,19 +410,30 @@
       </div>
     </div>
 
-    <!-- 页脚 -->
     <div class="footer-note">
       🌊 愿每一朵浪花都为可馨歌唱，生日快乐！ 🐚
     </div>
   </div>
 
+  <!-- ====== 背景音乐播放器 ====== -->
+  <!-- 把下面的 music.mp3 换成你上传到 GitHub 的音乐文件名 -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="music.mp3" type="audio/mpeg">
+    你的浏览器不支持音频播放。
+  </audio>
+
+  <div class="music-player">
+    <button class="music-btn" id="musicBtn" title="播放/暂停音乐">▶</button>
+    <span class="music-label" id="musicLabel">点我播放音乐 🎵</span>
+  </div>
+
   <script>
     (function() {
+      // ===== 祝福生成器 =====
       const nameInput = document.getElementById('nameInput');
       const generateBtn = document.getElementById('generateWish');
       const wishOutput = document.getElementById('wishOutput');
 
-      // 海洋主题祝福模板 (灵活使用名字)
       const oceanWishes = [
         (name) => `🌊 愿 ${name} 的每一天，都如海面初升的太阳，温柔又充满希望。`,
         (name) => `💙 ${name}，愿你的快乐像潮汐一样，永不退去；烦恼像泡沫，一触即散。`,
@@ -432,31 +449,23 @@
         (name) => `🌊 熊可馨，大海把最温柔的蓝色都借给了你，生日快乐！`
       ];
 
-      // 随机海洋 emoji 小前缀（可选，已包含在模板中，但保留额外装饰感）
       function getRandomWish(name) {
-        // 如果名字为空，用默认词
         const safeName = name.trim() === '' ? '可馨' : name.trim();
-        // 随机选取一条
         const randomIndex = Math.floor(Math.random() * oceanWishes.length);
         return oceanWishes[randomIndex](safeName);
       }
 
-      // 更新输出并且带上动画
       function updateWish() {
         const name = nameInput.value;
         const wish = getRandomWish(name);
         wishOutput.textContent = wish;
-        // 添加高亮动画
         wishOutput.classList.add('glow');
         setTimeout(() => {
           wishOutput.classList.remove('glow');
         }, 600);
       }
 
-      // 点击按钮生成
       generateBtn.addEventListener('click', updateWish);
-
-      // 如果用户按回车也可以生成
       nameInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
           e.preventDefault();
@@ -464,11 +473,49 @@
         }
       });
 
-      // 页面加载后自动生成一条祝福，使用默认名字“熊可馨”
       window.addEventListener('load', () => {
-        setTimeout(() => {
-          updateWish();
-        }, 300);
+        setTimeout(updateWish, 300);
+      });
+
+      // ===== 音乐播放器逻辑 =====
+      const music = document.getElementById('bgMusic');
+      const musicBtn = document.getElementById('musicBtn');
+      const musicLabel = document.getElementById('musicLabel');
+
+      // 尝试自动播放（浏览器大多会拦截，所以不成功也没关系）
+      window.addEventListener('load', () => {
+        music.volume = 0.5;
+        const playPromise = music.play();
+        if (playPromise !== undefined) {
+          playPromise.then(() => {
+            // 自动播放成功
+            musicBtn.textContent = '⏸';
+            musicBtn.classList.add('playing');
+            musicLabel.textContent = '音乐播放中 🎵';
+          }).catch(() => {
+            // 自动播放被拦截，等用户点按钮
+            musicBtn.textContent = '▶';
+            musicLabel.textContent = '点我播放音乐 🎵';
+          });
+        }
+      });
+
+      // 点击按钮切换播放/暂停
+      musicBtn.addEventListener('click', () => {
+        if (music.paused) {
+          music.play().then(() => {
+            musicBtn.textContent = '⏸';
+            musicBtn.classList.add('playing');
+            musicLabel.textContent = '音乐播放中 🎵';
+          }).catch(() => {
+            musicLabel.textContent = '音乐加载失败，请检查文件名';
+          });
+        } else {
+          music.pause();
+          musicBtn.textContent = '▶';
+          musicBtn.classList.remove('playing');
+          musicLabel.textContent = '已暂停，点我继续 🎵';
+        }
       });
     })();
   </script>
