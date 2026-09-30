@@ -297,7 +297,6 @@
       border-radius: 60px;
       padding: 10px 20px 10px 12px;
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
-      transition: all 0.3s;
     }
 
     .music-btn {
@@ -331,12 +330,13 @@
       white-space: nowrap;
     }
 
-    /* ====== 全屏遮罩，提示点击 ====== */
+    /* ====== 进入遮罩 ====== */
     .enter-overlay {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
       background: rgba(5, 25, 40, 0.85);
       backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
       z-index: 1000;
       display: flex;
       flex-direction: column;
@@ -412,7 +412,7 @@
 </head>
 <body>
 
-  <!-- ====== 进入遮罩：用户点一下后，音乐正式播放 ====== -->
+  <!-- 进入遮罩：用户点一下后，音乐正式播放 -->
   <div class="enter-overlay" id="enterOverlay">
     <div class="big-icon">🌊</div>
     <h2>熊可馨，生日快乐</h2>
@@ -473,7 +473,7 @@
     </div>
   </div>
 
-  <!-- ====== 背景音乐 ====== -->
+  <!-- 背景音乐 -->
   <audio id="bgMusic" loop preload="auto">
     <source src="music.mp3" type="audio/mpeg">
   </audio>
@@ -522,7 +522,7 @@
       });
       window.addEventListener('load', () => setTimeout(updateWish, 300));
 
-      // ===== 音乐逻辑 =====
+      // ===== 音乐逻辑（修复版：只由用户点击触发播放）=====
       const music = document.getElementById('bgMusic');
       const musicBtn = document.getElementById('musicBtn');
       const musicLabel = document.getElementById('musicLabel');
@@ -531,30 +531,23 @@
 
       music.volume = 0.5;
 
-      // 页面打开时，尝试静音自动播放（大多数浏览器允许静音自动播）
-      window.addEventListener('load', () => {
-        music.muted = true;
-        music.play().then(() => {
-          // 静音自动播放成功，等待用户点击遮罩取消静音
-          console.log('静音自动播放已启动，等待用户点击');
-        }).catch(() => {
-          console.log('连静音自动播放都被拦截了');
-        });
-      });
-
       // 用户点击 "进入并播放音乐" 按钮
       enterBtn.addEventListener('click', () => {
-        // 取消静音 + 正式播放
         music.muted = false;
         music.volume = 0.5;
-        music.play().then(() => {
-          musicBtn.textContent = '⏸';
-          musicBtn.classList.add('playing');
-          musicLabel.textContent = '音乐播放中 🎵';
-        }).catch((err) => {
-          console.log('播放失败:', err);
-          musicLabel.textContent = '播放失败：' + err.message;
-        });
+
+        const playPromise = music.play();
+        if (playPromise !== undefined) {
+          playPromise.then(() => {
+            musicBtn.textContent = '⏸';
+            musicBtn.classList.add('playing');
+            musicLabel.textContent = '音乐播放中 🎵';
+          }).catch((err) => {
+            console.log('播放失败:', err);
+            musicLabel.textContent = '播放失败：' + err.message;
+          });
+        }
+
         // 淡出遮罩
         enterOverlay.classList.add('hide');
       });
@@ -563,13 +556,16 @@
       musicBtn.addEventListener('click', () => {
         if (music.paused) {
           music.muted = false;
-          music.play().then(() => {
-            musicBtn.textContent = '⏸';
-            musicBtn.classList.add('playing');
-            musicLabel.textContent = '音乐播放中 🎵';
-          }).catch((err) => {
-            musicLabel.textContent = '播放失败：' + err.message;
-          });
+          const playPromise = music.play();
+          if (playPromise !== undefined) {
+            playPromise.then(() => {
+              musicBtn.textContent = '⏸';
+              musicBtn.classList.add('playing');
+              musicLabel.textContent = '音乐播放中 🎵';
+            }).catch((err) => {
+              musicLabel.textContent = '播放失败：' + err.message;
+            });
+          }
         } else {
           music.pause();
           musicBtn.textContent = '▶';
